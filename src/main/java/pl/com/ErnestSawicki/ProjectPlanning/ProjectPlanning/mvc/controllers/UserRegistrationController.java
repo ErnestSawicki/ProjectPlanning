@@ -34,7 +34,6 @@ public class UserRegistrationController {
                                @RequestParam String lastName,
                                @RequestParam String email,
                                @RequestParam String password) {
-        System.out.println(userName + firstName + lastName + email + password);
         User user = new User();
         user.setUsername(userName);
         user.setFirstName(firstName);
@@ -43,9 +42,7 @@ public class UserRegistrationController {
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(password));
         user.setRole("USER");
-        System.out.println(user.toString());
         userRepository.save(user);
-
         return "redirect:/";
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,15 +31,8 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "id")
-            )
-    private Set<Role> roles;
+    @OneToMany
+    private List<Task> ownedTasks;
 
     @Override
     public boolean equals(Object o) {
@@ -62,7 +56,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 }
