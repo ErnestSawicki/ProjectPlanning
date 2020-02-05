@@ -14,6 +14,7 @@
     <title>UserTasks</title>
 </head>
 <body>
+<jsp:include page="fragments/header.jsp"/>
 <table border="black">
     <tr>
         <th>Lp.</th>

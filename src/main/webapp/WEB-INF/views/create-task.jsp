@@ -19,6 +19,7 @@
     <title>UserRegistrationPage</title>
 </head>
 <body>
+<jsp:include page="fragments/header.jsp"/>
 <p>Welcome to registerPage new User</p>
 <form method="post" action="/createTask">
     <div>

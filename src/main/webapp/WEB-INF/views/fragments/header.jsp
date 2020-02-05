@@ -109,7 +109,7 @@
                 </form>
             </sec:authorize></li></a>
             <a><li><sec:authorize access="!isAuthenticated()">
-                <form method="post" action="/login">
+                <form method="get" action="/login">
                     <button class="myButton" type="submit">Login</button>
                     <sec:csrfInput/>
                 </form>
