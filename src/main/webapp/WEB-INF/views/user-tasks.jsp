@@ -11,29 +11,86 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        .footer{
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            font-family: Montserrat;
+            font-size: 16px;
+        }
+
+        th{
+            height: 50px;
+            text-align: center;
+            vertical-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        td{
+            height: 50px;
+            text-align: center;
+            vertical-align: center;
+        }
+
+        tr:hover{
+            background-color: #f5f5f5;
+        }
+        tr:nth-child(even) {background-color: cadetblue;}
+        .row-Lp{
+            width: 3%;
+        }
+        .row-PID{ width: 5%;}
+        .row-Description{ width: 30%;}
+        .row-Type{
+            width: 5%;}
+        .row-Status{
+            width: 5%;
+        }
+        .row-StartDate{width: 7%;}
+        .row-DueDate{width: 7%;}
+        .row-PlannedHours{width: 3%;}
+    </style>
     <title>UserTasks</title>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<table border="black">
+<table>
     <tr>
-        <th>Lp.</th>
-        <th>PID</th>
-        <th>Description</th>
-        <th>Start date</th>
-        <th>End date</th>
+        <th class="row-Lp">Lp.</th>
+        <th class="row-PID">PID</th>
+        <th class="row-Type">Type</th>
+        <th class="row-Description">Description</th>
+        <th class="row-Status">Status</th>
+        <th class="row-StartDate">Start date</th>
+        <th class="row-DueDate">Due date</th>
+        <th class="row-PlannedHours">Planned hours</th>
     </tr>
     <c:forEach items="${userTasks}" var="userTask" varStatus="stat">
         <tr>
             <td>${stat.count}</td>
             <td>${userTask.PID}</td>
+            <td>${userTask.taskType}</td>
             <td>${userTask.taskDescription}</td>
+            <td>${userTask.taskStatus}</td>
             <td>${userTask.startDate}</td>
             <td>${userTask.endDate}</td>
+            <td>${userTask.plannedHours}</td>
         </tr>
     </c:forEach>
 </table>
-
-
+<div class="footer">
+    <jsp:include page="fragments/footer.jsp"/>
+</div>
 </body>
 </html>
