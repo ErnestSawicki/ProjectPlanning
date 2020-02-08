@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
@@ -30,6 +29,14 @@ public class Task {
 
     @Column(name = "planned_hours")
     private Integer plannedHours;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private TaskStatus taskStatus;
+
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private TaskType taskType;
 
     @ManyToOne
     @JoinColumn(name = "owner_id")

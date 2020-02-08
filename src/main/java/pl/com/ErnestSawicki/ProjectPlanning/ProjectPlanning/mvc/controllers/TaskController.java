@@ -39,7 +39,8 @@ public class TaskController {
                              @RequestParam String taskDescription,
                              @RequestParam String startDate,
                              @RequestParam String endDate,
-                             @RequestParam Integer plannedHours, HttpServletRequest request){
+                             @RequestParam Integer plannedHours,
+                             HttpServletRequest request){
         Task task = new Task();
         task.setPID(PID);
         task.setTaskDescription(taskDescription);
