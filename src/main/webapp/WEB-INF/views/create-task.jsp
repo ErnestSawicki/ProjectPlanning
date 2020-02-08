@@ -125,10 +125,10 @@
     </div>
     <div class="row">
         <div class="col-25">
-        <label for="endDate">DUE DATE</label>
+        <label for="dueDate">DUE DATE</label>
         </div>
         <div class="col-75">
-        <input type="date" required name="endDate" id="endDate"/>
+        <input type="date" required name="dueDate" id="dueDate"/>
         </div>
     </div>
     <div class="row">

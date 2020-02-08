@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Task;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskType;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
@@ -38,15 +40,19 @@ public class TaskController {
     public String createTask(@RequestParam String PID,
                              @RequestParam String taskDescription,
                              @RequestParam String startDate,
-                             @RequestParam String endDate,
+                             @RequestParam String dueDate,
                              @RequestParam Integer plannedHours,
+                             @RequestParam String taskType,
+                             @RequestParam String taskStatus,
                              HttpServletRequest request){
         Task task = new Task();
         task.setPID(PID);
         task.setTaskDescription(taskDescription);
-        task.setStartDate(LocalDate.now());
-        task.setEndDate(LocalDate.of(2020,3,5));
+        task.setStartDate(LocalDate.parse(startDate));
+        task.setEndDate(LocalDate.parse(dueDate));
         task.setPlannedHours(plannedHours);
+        task.setTaskStatus(TaskStatus.valueOf(taskStatus));
+        task.setTaskType(TaskType.valueOf(taskType));
         String username = request.getUserPrincipal().getName();
         User loggedUser = userRepository.findUserByUsername(username).get(0);
         task.setTaskOwner(loggedUser);
