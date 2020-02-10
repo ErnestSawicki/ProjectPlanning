@@ -44,4 +44,12 @@ public class Task {
     @Column(name = "owner_id", insertable = false, updatable = false)
     private Long ownerId;
 
+    @ManyToOne
+    @JoinColumn(name = "assignee_id")
+    private User taskAssignee;
+    @Column(name = "assignee_id", insertable = false, updatable = false)
+    private Long assigneeId;
+
+
+
 }

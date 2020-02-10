@@ -2,6 +2,7 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.ValidPassword;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,8 +25,10 @@ public class User {
     private String lastName;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
     @Column(name = "password", nullable = false)
     private String password;
+
     @Column(name = "ROLE")
     private String role;
     @Column(name = "active")
@@ -33,6 +36,9 @@ public class User {
 
     @OneToMany
     private List<Task> ownedTasks;
+
+    @OneToMany
+    private List<Task> assignedTasks;
 
     @Override
     public boolean equals(Object o) {

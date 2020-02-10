@@ -13,6 +13,9 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <style>
+        *:focus {
+            outline: none;
+        }
         .footer{
             position: fixed;
             bottom: 0;

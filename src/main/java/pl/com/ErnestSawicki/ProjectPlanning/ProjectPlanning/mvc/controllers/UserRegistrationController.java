@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.PasswordConstraintValidator;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 
@@ -40,6 +41,9 @@ public class UserRegistrationController {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setActive(true);
+        PasswordConstraintValidator passwordConstraintValidator = new PasswordConstraintValidator();
+
+        user.setPassword(password);
         user.setPassword(passwordEncoder.encode(password));
         user.setRole("USER");
         userRepository.save(user);

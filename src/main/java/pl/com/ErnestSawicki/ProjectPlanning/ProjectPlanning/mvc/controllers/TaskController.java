@@ -3,6 +3,7 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.Us
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 @RequestMapping("/createTask")
@@ -32,7 +34,9 @@ public class TaskController {
     }
 
     @GetMapping
-    public String getCreateTaskPage(){
+    public String getCreateTaskPage(Model model){
+        List<User> assignees = userRepository.findAll();
+        model.addAttribute("assignees", assignees);
         return "/WEB-INF/views/create-task.jsp";
     }
 
@@ -56,6 +60,7 @@ public class TaskController {
         String username = request.getUserPrincipal().getName();
         User loggedUser = userRepository.findUserByUsername(username).get(0);
         task.setTaskOwner(loggedUser);
+        task.setTaskAssignee(loggedUser);
         taskRepository.save(task);
         return "redirect:/";
     }

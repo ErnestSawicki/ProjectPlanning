@@ -8,6 +8,7 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,6 +170,26 @@
             <option value="REQUIREMENTS">REQUIREMENTS</option>
             <option value="OTHER">OTHER</option>
         </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label for="taskAssignee">ASSIGNEE</label>
+        </div>
+        <div>
+            <select id="taskAssignee" name="taskAsignee">
+                <c:forEach items="${assignees}" var="assignee">
+                    <option value="${assignee.username}">${assignee.firstName} ${assignee.lastName}</option>
+                </c:forEach>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-25">
+            <label for="image">IMAGE</label>
+        </div>
+        <div class="col-75">
+            <input type="file" required name="image" id="image"/>
         </div>
     </div>
 
