@@ -34,6 +34,12 @@ public class User {
     @Column(name = "active")
     private Boolean active;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Employee_Project",
+    joinColumns = {@JoinColumn(name = "employee_id")},
+    inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    Set<Project> projects;
+
     @OneToMany
     private List<Task> ownedTasks;
 
