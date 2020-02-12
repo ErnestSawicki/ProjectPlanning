@@ -25,6 +25,7 @@ public class Project {
     private String description;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private ProjectMaturity projectMaturity;
 
     @ManyToMany(mappedBy = "projects")
