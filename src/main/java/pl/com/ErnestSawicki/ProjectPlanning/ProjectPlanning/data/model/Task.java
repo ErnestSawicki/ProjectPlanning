@@ -18,8 +18,11 @@ public class Task {
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String taskDescription;
 
-    @Column(name = "PID")
-    private String PID;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
+    @Column(name = "project_id", insertable = false, updatable = false)
+    private String projectId;
 
     @Column(name = "start_date")
     private LocalDate startDate;

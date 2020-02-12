@@ -12,14 +12,12 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column
+    private String PID;
 
     @Column
     private String projectName;
 
-    @Column
-    private String PID;
 
     @Column
     private String description;
@@ -30,5 +28,8 @@ public class Project {
 
     @ManyToMany(mappedBy = "projects")
     private List<User> participants;
+
+    @OneToMany
+    private List<Task> tasks;
 
 }

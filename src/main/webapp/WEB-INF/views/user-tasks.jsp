@@ -79,7 +79,7 @@
     <c:forEach items="${userTasks}" var="userTask" varStatus="stat">
         <tr>
             <td>${stat.count}</td>
-            <td>${userTask.PID}</td>
+            <td>${userTask.project.PID}</td>
             <td>${userTask.taskType}</td>
             <td>${userTask.taskDescription}</td>
             <td>${userTask.taskStatus}</td>

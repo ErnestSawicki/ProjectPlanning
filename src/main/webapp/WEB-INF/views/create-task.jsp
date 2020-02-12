@@ -104,8 +104,12 @@
         <div class="col-25">
         <label for="PID">PID</label>
         </div>
-        <div class="col-75">
-        <input type="text" required name="PID" id="PID"/>
+        <div>
+            <select id="PID" name="PID">
+                <c:forEach items="${projects}" var="project">
+                    <option value="${project.PID}">${project.PID}</option>
+                </c:forEach>
+            </select>
         </div>
     </div>
     <div class="row">
@@ -182,14 +186,6 @@
                     <option value="${assignee.username}">${assignee.firstName} ${assignee.lastName}</option>
                 </c:forEach>
             </select>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-25">
-            <label for="image">IMAGE</label>
-        </div>
-        <div class="col-75">
-            <input type="file" required name="image" id="image"/>
         </div>
     </div>
 
