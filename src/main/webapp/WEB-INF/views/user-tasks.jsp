@@ -60,6 +60,7 @@
         .row-StartDate{width: 7%;}
         .row-DueDate{width: 7%;}
         .row-PlannedHours{width: 3%;}
+        .row-Modify{width: 5%;}
     </style>
     <title>UserTasks</title>
 </head>
@@ -75,6 +76,7 @@
         <th class="row-StartDate">Start date</th>
         <th class="row-DueDate">Due date</th>
         <th class="row-PlannedHours">Planned hours</th>
+        <th class="row-Modify">Modify task</th>
     </tr>
     <c:forEach items="${userTasks}" var="userTask" varStatus="stat">
         <tr>
@@ -86,6 +88,7 @@
             <td>${userTask.startDate}</td>
             <td>${userTask.endDate}</td>
             <td>${userTask.plannedHours}</td>
+            <td><a href="/modifyTask?taskId=${userTask.id}"/>Modify</td>
         </tr>
     </c:forEach>
 </table>
