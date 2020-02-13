@@ -97,7 +97,8 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div class="container">
-    <form method="post" action="/createTask">
+    <form method="post" action="/modifyTask">
+        <input type="number" value="${taskToModify.id}" id="taskId" requred name="taskId" hidden/>
         <div class="row">
             <div class="col-25">
                 <label for="PID">PID</label>
