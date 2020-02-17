@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
    @Override
-   public void initialize(ValidPassword constraint) {
+   public void initialize(ValidPassword arg0) {
    }
 
    @Override

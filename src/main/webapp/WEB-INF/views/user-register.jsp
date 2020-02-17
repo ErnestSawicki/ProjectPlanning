@@ -69,10 +69,10 @@
 <form method="post" action="/register">
     <div class="row">
         <div class="col-25">
-            <label for="userName">Username</label>
+            <label for="username">Username</label>
         </div>
         <div class="col-75">
-            <input type="text" required name="userName" id="userName" class="form-control"
+            <input type="text" required name="username" id="username" class="form-control"
                    placeholder="Enter your username"/>
         </div>
     </div>

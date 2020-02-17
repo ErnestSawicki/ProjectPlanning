@@ -1,17 +1,22 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 
+import com.fasterxml.jackson.databind.BeanProperty;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.PasswordConstraintValidator;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTORegistration;
+
+import javax.validation.Valid;
 
 @Controller
+@Slf4j
 @RequestMapping("/register")
 public class UserRegistrationController {
 
@@ -30,23 +35,19 @@ public class UserRegistrationController {
     }
 
     @PostMapping
-    public String registerUser(@RequestParam String userName,
-                               @RequestParam String firstName,
-                               @RequestParam String lastName,
-                               @RequestParam String email,
-                               @RequestParam String password) {
-        User user = new User();
-        user.setUsername(userName);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setEmail(email);
-        user.setActive(true);
-        PasswordConstraintValidator passwordConstraintValidator = new PasswordConstraintValidator();
+    public String registerUser(@Valid UserDTORegistration userDTORegistration, BindingResult result) {
+        if (result.hasErrors()){
+            return "redirect:/register";
+        }
 
-        user.setPassword(password);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole("USER");
-        userRepository.save(user);
+        log.trace("Form data -> userDTORegistration: {}", userDTORegistration.toString());
+        User registeredUser = new User();
+        BeanUtils.copyProperties(userDTORegistration, registeredUser);
+        registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
+        registeredUser.setRole("USER");
+        registeredUser.setActive(true);
+        log.trace("Created user -> {}", registeredUser.toString());
+        userRepository.save(registeredUser);
         return "redirect:/";
     }
 }
