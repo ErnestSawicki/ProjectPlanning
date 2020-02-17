@@ -31,7 +31,7 @@ public class UserRegistrationController {
 
     @GetMapping
     public String getRegisterPage() {
-        return "/WEB-INF/views/user-register.jsp";
+        return "user-register";
     }
 
     @PostMapping

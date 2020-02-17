@@ -23,7 +23,7 @@ public class ProjectController {
 
     @GetMapping
     public String getProjectPage(){
-        return "/WEB-INF/views/create-project.jsp";
+        return "create-project";
 
     }
 

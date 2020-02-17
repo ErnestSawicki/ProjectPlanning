@@ -28,7 +28,7 @@ public class ModifyTask {
                                     Model model){
         Task taskToModify = taskRepository.getOne(taskId);
         model.addAttribute("taskToModify", taskToModify);
-        return "/WEB-INF/views/modify-task.jsp";
+        return "modify-task";
     }
 
     @PostMapping

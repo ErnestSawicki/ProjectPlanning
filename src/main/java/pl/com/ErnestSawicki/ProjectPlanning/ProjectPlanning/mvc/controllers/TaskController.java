@@ -40,7 +40,7 @@ public class TaskController {
 
         List<Project> projects = projectRepository.findAll();
         model.addAttribute("projects", projects);
-        return "/WEB-INF/views/create-task.jsp";
+        return "create-task";
     }
 
     @PostMapping

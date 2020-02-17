@@ -66,6 +66,18 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
+<div class="container">
+<form method="post" action="/userTasks">
+    <select name="taskStatus">
+        <option value="ALL">ALL</option>
+        <c:forEach items="${taskStatuses}" var="taskStatus">
+            <option value="${taskStatus}">${taskStatus.name()}</option>
+        </c:forEach>
+    </select>
+    <button class="login-button" type="submit">Filter</button>
+    <sec:csrfInput/>
+</form>
+</div>
 <table>
     <tr>
         <th class="row-Lp">Lp.</th>
