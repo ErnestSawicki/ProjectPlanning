@@ -74,6 +74,12 @@
             <option value="${taskStatus}">${taskStatus.name()}</option>
         </c:forEach>
     </select>
+    <select name="taskType">
+        <option value="ALL">ALL</option>
+        <c:forEach items="${taskTypes}" var="taskType">
+            <option value="${taskType}">${taskType.name()}</option>
+        </c:forEach>
+    </select>
     <button class="login-button" type="submit">Filter</button>
     <sec:csrfInput/>
 </form>

@@ -21,7 +21,17 @@ public class TaskSpecification implements Specification<Task> {
     @Override
     public Predicate toPredicate(Root<Task> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
-        predicates.add(criteriaBuilder.equal(root.get("taskStatus"), criteria.getTaskStatus()));
+        if (isNotNull(criteria.getTaskStatus()))
+            predicates.add(criteriaBuilder.equal(root.get("taskStatus"), criteria.getTaskStatus()));
+        if (isNotNull(criteria.getTaskOwner()))
+            predicates.add(criteriaBuilder.equal(root.get("taskOwner"), criteria.getTaskOwner()));
+        if (isNotNull(criteria.getTaskType()))
+            predicates.add(criteriaBuilder.equal(root.get("taskType"), criteria.getTaskType()));
+
         return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
+    }
+
+    private boolean isNotNull(Object object) {
+        return object != null;
     }
 }

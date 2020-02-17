@@ -35,6 +35,8 @@ public class UserTasksController {
     public String getUserTasksPage(Principal principal, Model model){
         List<TaskStatus> taskStatuses = Arrays.asList(TaskStatus.values());
         model.addAttribute("taskStatuses", taskStatuses);
+        List<TaskType> taskTypes = Arrays.asList(TaskType.values());
+        model.addAttribute("taskTypes", taskTypes);
 
         String username = principal.getName();
         List<Task> userTasks = taskRepository.findAllByTaskOwnerUsernameOrderByStartDateDesc(username);
@@ -44,14 +46,21 @@ public class UserTasksController {
 
     @PostMapping()
     public String userTasksStatusFiltered(@RequestParam String taskStatus,
-                                          Model model, Principal principal){
+                                          @RequestParam String taskType,
+                                          Model model){
         log.trace("Form task status: {}", taskStatus);
         Task taskCriteria = new Task();
         taskCriteria.setTaskStatus(TaskStatus.valueOf(taskStatus));
+        taskCriteria.setTaskType(TaskType.valueOf(taskType));
         Specification<Task> specification = new TaskSpecification(taskCriteria);
         List<Task> userTasksFiltered = taskRepository.findAll(specification);
-//        List<Task> userTasksFiltered = taskRepository.findAllByTaskOwnerUsernameAndTaskStatus(principal.getName(), TaskStatus.valueOf(taskStatus));
+
         model.addAttribute("userTasks", userTasksFiltered);
+
+        List<TaskStatus> taskStatuses = Arrays.asList(TaskStatus.values());
+        model.addAttribute("taskStatuses", taskStatuses);
+        List<TaskType> taskTypes = Arrays.asList(TaskType.values());
+        model.addAttribute("taskTypes", taskTypes);
         return "user-tasks";
     }
 }
