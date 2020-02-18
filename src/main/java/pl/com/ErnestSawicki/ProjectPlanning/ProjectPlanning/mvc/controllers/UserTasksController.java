@@ -48,10 +48,13 @@ public class UserTasksController {
     public String userTasksStatusFiltered(@RequestParam String taskStatus,
                                           @RequestParam String taskType,
                                           Model model){
-        log.trace("Form task status: {}", taskStatus);
         Task taskCriteria = new Task();
-        taskCriteria.setTaskStatus(TaskStatus.valueOf(taskStatus));
-        taskCriteria.setTaskType(TaskType.valueOf(taskType));
+        if (!taskStatus.equals("ALL")){
+            taskCriteria.setTaskStatus(TaskStatus.valueOf(taskStatus));
+        }
+        if (!taskType.equals("ALL")){
+            taskCriteria.setTaskType(TaskType.valueOf(taskType));
+        }
         Specification<Task> specification = new TaskSpecification(taskCriteria);
         List<Task> userTasksFiltered = taskRepository.findAll(specification);
 
