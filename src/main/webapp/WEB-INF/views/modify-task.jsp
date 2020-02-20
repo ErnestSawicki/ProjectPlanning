@@ -120,7 +120,7 @@
                 <label for="startDate">START DATE</label>
             </div>
             <div class="col-75">
-                <input type="date" required name="startDate" id="startDate" value="${taskToModify.startDate}"/>
+                <input type="date" required name="startDate" id="startDate" value="${taskToModify.startDate}" readonly/>
             </div>
         </div>
         <div class="row">
@@ -128,7 +128,15 @@
                 <label for="dueDate">DUE DATE</label>
             </div>
             <div class="col-75">
-                <input type="date" required name="dueDate" id="dueDate" value="${taskToModify.endDate}"/>
+                <input type="date" required name="dueDate" id="dueDate" value="${taskToModify.dueDate}" readonly/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="finishDate">FINISH DATE</label>
+            </div>
+            <div class="col-75">
+                <input type="date" required name="finishDate" id="finishDate" value="${taskToModify.finishDate}"/>
             </div>
         </div>
         <div class="row">
@@ -136,7 +144,15 @@
                 <label for="plannedHours">HOURS PLANNED</label>
             </div>
             <div class="col-75">
-                <input type="number" required name="plannedHours" id="plannedHours" value="${taskToModify.plannedHours}"/>
+                <input type="number" required name="plannedHours" id="plannedHours" value="${taskToModify.plannedHours}" readonly/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="actualHours">ACTUAL HOURS</label>
+            </div>
+            <div class="col-75">
+                <input type="number" required name="actualHours" id="actualHours" value="${taskToModify.actualHours}"/>
             </div>
         </div>
         <div class="row">

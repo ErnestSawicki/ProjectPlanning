@@ -104,7 +104,7 @@
             <td>${userTask.taskDescription}</td>
             <td>${userTask.taskStatus}</td>
             <td>${userTask.startDate}</td>
-            <td>${userTask.endDate}</td>
+            <td>${userTask.dueDate}</td>
             <td>${userTask.plannedHours}</td>
             <td><a href="/modifyTask?taskId=${userTask.id}"/>Modify</td>
         </tr>

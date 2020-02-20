@@ -56,7 +56,7 @@ public class TaskController {
         taskToCreate.setProject(projectRepository.getOne(taskDTO.getPID()));
         taskToCreate.setTaskDescription(taskDTO.getTaskDescription());
         taskToCreate.setStartDate(LocalDate.parse(taskDTO.getStartDate()));
-        taskToCreate.setEndDate(LocalDate.parse(taskDTO.getDueDate()));
+        taskToCreate.setDueDate(LocalDate.parse(taskDTO.getDueDate()));
         taskToCreate.setPlannedHours(taskDTO.getPlannedHours());
         taskToCreate.setTaskStatus(TaskStatus.valueOf(taskDTO.getTaskStatus()));
         taskToCreate.setTaskType(TaskType.valueOf(taskDTO.getTaskType()));

@@ -12,6 +12,56 @@
 <html>
 <head>
     <title>ProjectTasks</title>
+    <style>
+        .footer{
+            position: static;
+            bottom: 0;
+            width: 100%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            font-family: Montserrat;
+            font-size: 16px;
+        }
+
+        th{
+            height: 50px;
+            text-align: center;
+            vertical-align: center;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        td{
+            height: 50px;
+            text-align: center;
+            vertical-align: center;
+        }
+
+        tr:hover{
+            background-color: #f5f5f5;
+        }
+        tr:nth-child(even) {background-color: cadetblue;}
+        .row-Lp{
+            width: 3%;
+        }
+        .row-PID{ width: 5%;}
+        .row-Description{ width: 30%;}
+        .row-Type{
+            width: 5%;}
+        .row-Status{
+            width: 5%;
+        }
+        .row-StartDate{width: 7%;}
+        .row-DueDate{width: 7%;}
+        .row-PlannedHours{width: 3%;}
+        .row-Modify{width: 5%;}
+    </style>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
@@ -41,10 +91,10 @@
             <td>${projectTask.taskType.toString()}</td>
             <td>${projectTask.taskStatus.toString()}</td>
             <td>${projectTask.startDate}</td>
-            <td>${projectTask.endDate}</td>
-            <td>Finish date tbc</td>
+            <td>${projectTask.dueDate}</td>
+            <td>${projectTask.finishDate}</td>
             <td>${projectTask.plannedHours}</td>
-            <td>Hours spent tbc</td>
+            <td>${projectTask.actualHours}</td>
             <td><a href="/modifyTask?taskId=${projectTask.id}"/>Modify</td>
         </tr>
     </c:forEach>

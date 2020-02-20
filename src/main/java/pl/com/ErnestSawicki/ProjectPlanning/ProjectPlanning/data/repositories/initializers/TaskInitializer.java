@@ -38,19 +38,19 @@ public class TaskInitializer {
         List<User> users = userRepository.findAll();
         List<Project> projects = projectRepository.findAll();
 
-        for(int i =0; i < 100; i++){
+        for(int i =0; i < 500; i++){
             Task task = new Task();
             task.setTaskOwner(users.get(new Random().nextInt(9)));
             task.setTaskAssignee(users.get(new Random().nextInt(9)));
             task.setStartDate(LocalDate.now());
-            task.setEndDate(LocalDate.of(2020,
+            task.setDueDate(LocalDate.of(2020,
                     new Random().nextInt(12) + 1,
                     new Random().nextInt(28) + 1));
             task.setTaskType(TaskType.values()[new Random().nextInt(8)]);
             task.setTaskStatus(TaskStatus.values()[new Random().nextInt(4)]);
             task.setPlannedHours(new Random().nextInt(10));
             task.setTaskDescription(faker.backToTheFuture().quote());
-            task.setProject(projects.get(new Random().nextInt(3)));
+            task.setProject(projects.get(new Random().nextInt(9)));
             taskRepository.save(task);
         }
 

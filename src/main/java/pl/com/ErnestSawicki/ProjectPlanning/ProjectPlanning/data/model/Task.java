@@ -29,11 +29,17 @@ public class Task {
     @Column(name = "start_date")
     private LocalDate startDate;
 
-    @Column(name = "end_date")
-    private LocalDate endDate;
+    @Column(name = "due_date")
+    private LocalDate dueDate;
+
+    @Column(name = "finish_date")
+    private LocalDate finishDate;
 
     @Column(name = "planned_hours")
     private Integer plannedHours;
+
+    @Column(name = "actual_hours")
+    private Integer actualHours;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
@@ -60,6 +66,8 @@ public class Task {
     joinColumns = {@JoinColumn(name = "task_id")},
     inverseJoinColumns = {@JoinColumn(name = "part_id")})
     private List<Part> parts = new ArrayList<>();
+
+
 
 
 

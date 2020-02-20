@@ -1,5 +1,6 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Task;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskStatus;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskType;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.TaskDTOModify;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -32,21 +34,10 @@ public class ModifyTask {
     }
 
     @PostMapping
-    public String modifyTask(@RequestParam Long taskId,
-                             @RequestParam String taskDescription,
-                             @RequestParam String startDate,
-                             @RequestParam String dueDate,
-                             @RequestParam Integer plannedHours,
-                             @RequestParam String taskType,
-                             @RequestParam String taskStatus){
+    public String modifyTask(@RequestParam Long taskId, TaskDTOModify taskDTOModify){
 
         Task taskToModify = taskRepository.getOne(taskId);
-        taskToModify.setTaskDescription(taskDescription);
-        taskToModify.setStartDate(LocalDate.parse(startDate));
-        taskToModify.setEndDate(LocalDate.parse(dueDate));
-        taskToModify.setPlannedHours(plannedHours);
-        taskToModify.setTaskStatus(TaskStatus.valueOf(taskStatus));
-        taskToModify.setTaskType(TaskType.valueOf(taskType));
+        taskDTOModify.copyProperties(taskDTOModify, taskToModify);
         taskRepository.save(taskToModify);
         return "redirect:/userTasks";
     }
