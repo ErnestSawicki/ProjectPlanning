@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 
-@Component
 @Slf4j
 public class TaskInitializer {
 

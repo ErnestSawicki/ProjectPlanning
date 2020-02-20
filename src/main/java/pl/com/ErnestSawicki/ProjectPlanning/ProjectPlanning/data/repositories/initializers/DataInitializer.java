@@ -1,3 +1,4 @@
+/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,28 +8,33 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.PartRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Random;
 
 @Component
 @Slf4j
+@Transactional
 public class DataInitializer implements CommandLineRunner {
 
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PartRepository partRepository;
 
     @Autowired
-    public DataInitializer(ProjectRepository projectRepository, UserRepository userRepository, TaskRepository taskRepository, PasswordEncoder passwordEncoder) {
+    public DataInitializer(ProjectRepository projectRepository, UserRepository userRepository, TaskRepository taskRepository, PasswordEncoder passwordEncoder, PartRepository partRepository) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.passwordEncoder = passwordEncoder;
+        this.partRepository = partRepository;
     }
 
     @Override
@@ -53,5 +59,9 @@ public class DataInitializer implements CommandLineRunner {
             project.getParticipants().add(user);
             projectRepository.save(project);
         }
+
+        PartInitializer partInitializer = new PartInitializer();
+        partInitializer.initializePartSampleData(partRepository);
     }
 }
+*/

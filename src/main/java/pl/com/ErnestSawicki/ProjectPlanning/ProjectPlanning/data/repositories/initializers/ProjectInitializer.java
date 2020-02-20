@@ -15,7 +15,6 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.Pr
 import java.util.Locale;
 import java.util.Random;
 
-@Component
 @Slf4j
 public class ProjectInitializer {
 

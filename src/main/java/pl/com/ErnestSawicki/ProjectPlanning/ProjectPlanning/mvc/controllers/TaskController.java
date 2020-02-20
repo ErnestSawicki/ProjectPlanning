@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.*;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.PartRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.TaskDTOCreate;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,50 +28,49 @@ public class TaskController {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
+    private final PartRepository partRepository;
 
     @Autowired
-    public TaskController(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
+    public TaskController(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository, PartRepository partRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
+        this.partRepository = partRepository;
     }
 
     @GetMapping
-    public String getCreateTaskPage(Model model){
+    public String getCreateTaskPage(Model model, Principal principal){
         List<User> assignees = userRepository.findAll();
         model.addAttribute("assignees", assignees);
 
-        List<Project> projects = projectRepository.findAll();
+        User loggedUser = userRepository.findUserByUsername(principal.getName()).get(0);
+        List<Project> projects = projectRepository.findAllByParticipantsIs(loggedUser);
         model.addAttribute("projects", projects);
         return "create-task";
     }
 
     @PostMapping
-    public String createTask(@RequestParam String PID,
-                             @RequestParam String taskDescription,
-                             @RequestParam String startDate,
-                             @RequestParam String dueDate,
-                             @RequestParam Integer plannedHours,
-                             @RequestParam String taskType,
-                             @RequestParam String taskStatus,
+    public String createTask(TaskDTOCreate taskDTO,
                              HttpServletRequest request){
-        Task task = new Task();
-        task.setProjectId(PID);
-        task.setProject(projectRepository.getOne(PID));
-        task.setTaskDescription(taskDescription);
-        task.setStartDate(LocalDate.parse(startDate));
-        task.setEndDate(LocalDate.parse(dueDate));
-        task.setPlannedHours(plannedHours);
-        task.setTaskStatus(TaskStatus.valueOf(taskStatus));
-        task.setTaskType(TaskType.valueOf(taskType));
+        Task taskToCreate = new Task();
+        taskToCreate.setProject(projectRepository.getOne(taskDTO.getPID()));
+        taskToCreate.setTaskDescription(taskDTO.getTaskDescription());
+        taskToCreate.setStartDate(LocalDate.parse(taskDTO.getStartDate()));
+        taskToCreate.setEndDate(LocalDate.parse(taskDTO.getDueDate()));
+        taskToCreate.setPlannedHours(taskDTO.getPlannedHours());
+        taskToCreate.setTaskStatus(TaskStatus.valueOf(taskDTO.getTaskStatus()));
+        taskToCreate.setTaskType(TaskType.valueOf(taskDTO.getTaskType()));
 
         String username = request.getUserPrincipal().getName();
         User loggedUser = userRepository.findUserByUsername(username).get(0);
-        task.setTaskOwner(loggedUser);
-        task.setOwnerId(loggedUser.getId());
-        task.setTaskAssignee(loggedUser);
-        task.setAssigneeId(loggedUser.getId());
-        taskRepository.save(task);
+        taskToCreate.setTaskOwner(loggedUser);
+        taskToCreate.setOwnerId(loggedUser.getId());
+
+        User assignee = userRepository.findUserByUsername(taskDTO.getAssigneeName()).get(0);
+        taskToCreate.setTaskAssignee(assignee);
+        taskToCreate.setAssigneeId(loggedUser.getId());
+
+        taskRepository.save(taskToCreate);
         return "redirect:/";
     }
 }

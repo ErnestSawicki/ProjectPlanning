@@ -17,7 +17,6 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.Us
 
 import java.util.*;
 
-@Component
 @Slf4j
 public class UserInitializer {
 

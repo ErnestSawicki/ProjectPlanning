@@ -178,10 +178,10 @@
     </div>
     <div class="row">
         <div class="col-25">
-            <label for="taskAssignee">ASSIGNEE</label>
+            <label for="assigneeName">ASSIGNEE</label>
         </div>
         <div>
-            <select id="taskAssignee" name="taskAsignee">
+            <select id="assigneeName" name="assigneeName">
                 <c:forEach items="${assignees}" var="assignee">
                     <option value="${assignee.username}">${assignee.firstName} ${assignee.lastName}</option>
                 </c:forEach>
