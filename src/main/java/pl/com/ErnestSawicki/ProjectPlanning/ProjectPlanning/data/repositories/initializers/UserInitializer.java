@@ -1,3 +1,4 @@
+/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import com.github.javafaker.Faker;
@@ -15,7 +16,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 
-import java.util.Locale;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -40,7 +41,7 @@ public class UserInitializer implements CommandLineRunner {
         Faker faker = new Faker();
         FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-GB"), new RandomService());
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setActive(true);
             String firstName = faker.name().firstName();
@@ -49,13 +50,13 @@ public class UserInitializer implements CommandLineRunner {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setUsername(username);
-            user.setEmail(fakeValuesService.bothify(username+"@wabco-auto.com"));
+            user.setEmail(fakeValuesService.bothify(username + "@wabco-auto.com"));
             user.setPassword(passwordEncoder.encode("pass"));
             user.setRole("USER");
-
 
             userRepository.save(user);
         }
         log.info("UserInitializer: ...finished with data initialization");
     }
 }
+*/

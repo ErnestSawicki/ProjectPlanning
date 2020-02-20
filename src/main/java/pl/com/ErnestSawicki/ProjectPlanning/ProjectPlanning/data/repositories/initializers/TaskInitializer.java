@@ -1,4 +1,3 @@
-/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import com.github.javafaker.Faker;
@@ -60,4 +59,3 @@ public class TaskInitializer implements CommandLineRunner {
         log.info("TaskInitializer: ...finished with data initialization");
     }
 }
-*/

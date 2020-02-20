@@ -5,6 +5,7 @@ import lombok.Setter;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.ValidPassword;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class User {
     @JoinTable(name = "Employee_Project",
     joinColumns = {@JoinColumn(name = "employee_id")},
     inverseJoinColumns = {@JoinColumn(name = "project_id")})
-    Set<Project> projects;
+    Set<Project> projects = new HashSet<>();
 
     @OneToMany
     private List<Task> ownedTasks;

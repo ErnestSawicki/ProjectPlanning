@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
@@ -29,9 +30,10 @@ public class ProjectTasksController {
     }
 
     @GetMapping
-    public String getProjectTasks(@RequestParam Project choseProject,
+    public String getProjectTasks(@RequestParam String choseProject,
                                   Model model){
-        List<Task> allProjectTasks = taskRepository.findAllByProject(choseProject);
+        Project project = projectRepository.getOne(choseProject);
+        List<Task> allProjectTasks = taskRepository.findAllByProject(project);
         model.addAttribute("projectTasks", allProjectTasks);
 
         return "project-tasks";

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: dell
@@ -15,9 +16,9 @@
 </head>
 <body>
 <form method="get" action="/projectTasks">
-    <select name="choseProject">
+    <select name="choseProject" id="choseProject">
         <c:forEach items="${userProjects}" var="userProject">
-            <option value="${userProject}">${userProject.PID}</option>
+            <option value="${userProject.PID}">${userProject.PID}</option>
         </c:forEach>
     </select>
     <button class="myButton" type="submit">Open project</button>
