@@ -1,4 +1,3 @@
-/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import com.github.javafaker.Faker;
@@ -11,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 
 import java.util.Locale;
@@ -21,12 +22,14 @@ import java.util.Locale;
 public class UserInitializer implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final ProjectRepository projectRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder, ProjectRepository projectRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.projectRepository = projectRepository;
     }
 
 
@@ -50,9 +53,9 @@ public class UserInitializer implements CommandLineRunner {
             user.setPassword(passwordEncoder.encode("pass"));
             user.setRole("USER");
 
+
             userRepository.save(user);
         }
         log.info("UserInitializer: ...finished with data initialization");
     }
 }
-*/

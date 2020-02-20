@@ -21,6 +21,7 @@ public class ProjectInitializer implements CommandLineRunner {
 
     private final ProjectRepository projectRepository;
 
+
     @Autowired
     public ProjectInitializer(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
@@ -40,7 +41,6 @@ public class ProjectInitializer implements CommandLineRunner {
             project.setDescription(faker.harryPotter().quote());
             project.setProjectName(faker.book().title());
             project.setPID(fakeValuesService.numerify("#####"));
-
             projectRepository.save(project);
 
         }
