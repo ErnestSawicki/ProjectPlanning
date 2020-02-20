@@ -1,4 +1,3 @@
-/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import com.github.javafaker.Faker;
@@ -7,6 +6,7 @@ import com.github.javafaker.service.RandomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.ProjectMaturity;
@@ -17,7 +17,7 @@ import java.util.Random;
 
 @Component
 @Slf4j
-public class ProjectInitializer implements CommandLineRunner {
+public class ProjectInitializer {
 
     private final ProjectRepository projectRepository;
 
@@ -27,8 +27,8 @@ public class ProjectInitializer implements CommandLineRunner {
         this.projectRepository = projectRepository;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+
+    public void initializeProjectSampleData() {
         log.info("ProjectInitializer: Starting to initialize project sample data ....");
         Faker faker = new Faker();
         FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-GB"), new RandomService());
@@ -47,4 +47,3 @@ public class ProjectInitializer implements CommandLineRunner {
         log.info("ProjectInitializer: ...finished with data initialization");
     }
 }
-*/

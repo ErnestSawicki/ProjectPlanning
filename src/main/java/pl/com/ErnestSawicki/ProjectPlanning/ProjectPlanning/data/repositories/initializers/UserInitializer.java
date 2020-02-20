@@ -1,4 +1,3 @@
-/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import com.github.javafaker.Faker;
@@ -20,7 +19,7 @@ import java.util.*;
 
 @Component
 @Slf4j
-public class UserInitializer implements CommandLineRunner {
+public class UserInitializer {
 
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
@@ -34,8 +33,8 @@ public class UserInitializer implements CommandLineRunner {
     }
 
 
-    @Override
-    public void run(String... args) throws Exception {
+
+    public void initializeUserSampleData() {
 
         log.info("UserInitializer: Starting to initialize user sample data ....");
         Faker faker = new Faker();
@@ -59,4 +58,3 @@ public class UserInitializer implements CommandLineRunner {
         log.info("UserInitializer: ...finished with data initialization");
     }
 }
-*/

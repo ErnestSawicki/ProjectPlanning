@@ -17,7 +17,7 @@ import java.util.Random;
 
 @Component
 @Slf4j
-public class TaskInitializer implements CommandLineRunner {
+public class TaskInitializer {
 
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
@@ -32,8 +32,7 @@ public class TaskInitializer implements CommandLineRunner {
         this.projectRepository = projectRepository;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+    public void initializeTaskSampleData() {
         log.info("TaskInitializer: Starting to initialize task sample data ....");
         Faker faker = new Faker();
 

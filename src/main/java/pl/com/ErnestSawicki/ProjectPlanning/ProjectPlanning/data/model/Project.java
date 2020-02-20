@@ -28,7 +28,7 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private ProjectMaturity projectMaturity;
 
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "projects")
     private List<User> participants = new ArrayList<>();
 
     @OneToMany
