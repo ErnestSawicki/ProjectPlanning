@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -52,6 +54,12 @@ public class Task {
     private User taskAssignee;
     @Column(name = "assignee_id", insertable = false, updatable = false)
     private Long assigneeId;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "Task_Part",
+    joinColumns = {@JoinColumn(name = "task_id")},
+    inverseJoinColumns = {@JoinColumn(name = "part_id")})
+    private List<Part> parts = new ArrayList<>();
 
 
 
