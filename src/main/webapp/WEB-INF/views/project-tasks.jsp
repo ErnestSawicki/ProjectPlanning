@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: dell
@@ -13,11 +14,12 @@
 <head>
     <title>ProjectTasks</title>
     <style>
-        .footer{
+        .footer {
             position: static;
             bottom: 0;
             width: 100%;
         }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -29,7 +31,7 @@
             font-size: 16px;
         }
 
-        th{
+        th {
             height: 50px;
             text-align: center;
             vertical-align: center;
@@ -37,34 +39,102 @@
             font-weight: bold;
         }
 
-        td{
+        td {
             height: 50px;
             text-align: center;
             vertical-align: center;
         }
 
-        tr:hover{
+        tr:hover {
             background-color: #f5f5f5;
         }
-        tr:nth-child(even) {background-color: cadetblue;}
-        .row-Lp{
+
+        tr:nth-child(even) {
+            background-color: cadetblue;
+        }
+
+        .row-Lp {
             width: 3%;
         }
-        .row-PID{ width: 5%;}
-        .row-Description{ width: 30%;}
-        .row-Type{
-            width: 5%;}
-        .row-Status{
+
+        .row-PID {
             width: 5%;
         }
-        .row-StartDate{width: 7%;}
-        .row-DueDate{width: 7%;}
-        .row-PlannedHours{width: 3%;}
-        .row-Modify{width: 5%;}
+
+        .row-Description {
+            width: 30%;
+        }
+
+        .row-Type {
+            width: 5%;
+        }
+
+        .row-Status {
+            width: 5%;
+        }
+
+        .row-StartDate {
+            width: 7%;
+        }
+
+        .row-DueDate {
+            width: 7%;
+        }
+
+        .row-PlannedHours {
+            width: 3%;
+        }
+
+        .row-Modify {
+            width: 5%;
+        }
     </style>
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
+<div>
+    <form method="post" action="/projectTasks">
+        <div class="filler">
+            <div class="row">
+                <div class="col-25">
+                    <label for="taskStatus">TASK STATUS</label>
+                </div>
+                <div class="col-75">
+                    <select id="taskStatus" name="taskStatus">
+                        <option value="ALL">ALL</option>
+                        <c:forEach items="${taskStatuses}" var="taskStatus">
+                            <option value="${taskStatus}">${taskStatus.name()}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="projectParticipants">PARTICIPANT</label>
+                </div>
+                <div class="col-75">
+                    <select name="projectParticipants" id="projectParticipants">
+                        <option value="ALL">ALL</option>
+                        <c:forEach items="${projectParticipants}" var="projectParticipant">
+                            <option value="${projectParticipant}">${projectParticipant.firstName} ${projectParticipant.lastName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="startDate">YEAR</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" required name="startDate" id="startDate" value="${taskToModify.startDate}" readonly/>
+                </div>
+            </div>
+        </div>
+        <button class="myButton" type="submit">Filter</button>
+        <sec:csrfInput/>
+    </form>
+</div>
+
 <table>
     <tr>
         <th class="row-Lp">Lp.</th>
