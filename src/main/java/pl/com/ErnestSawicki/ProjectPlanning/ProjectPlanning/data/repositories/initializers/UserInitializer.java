@@ -39,6 +39,15 @@ public class UserInitializer {
         Faker faker = new Faker();
         FakeValuesService fakeValuesService = new FakeValuesService(new Locale("en-GB"), new RandomService());
 
+        User mainUser = new User();
+        mainUser.setActive(true);
+        mainUser.setFirstName("Andrzej");
+        mainUser.setLastName("Kowalski");
+        mainUser.setUsername("user");
+        mainUser.setEmail(fakeValuesService.bothify(  "andrzej-kowalski@wabco-auto.com"));
+        mainUser.setPassword(passwordEncoder.encode("pass"));
+        mainUser.setRole("USER");
+
         for (int i = 0; i < 10; i++) {
             User user = new User();
             user.setActive(true);

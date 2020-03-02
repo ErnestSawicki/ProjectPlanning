@@ -1,9 +1,9 @@
-/*
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.initializers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
@@ -20,6 +20,7 @@ import java.util.Random;
 @Component
 @Slf4j
 @Transactional
+@Profile("heroku")
 public class DataInitializer implements CommandLineRunner {
 
     private final ProjectRepository projectRepository;
@@ -64,4 +65,3 @@ public class DataInitializer implements CommandLineRunner {
         partInitializer.initializePartSampleData(partRepository);
     }
 }
-*/
