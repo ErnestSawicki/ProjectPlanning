@@ -31,8 +31,6 @@ public class UserInitializer {
         this.projectRepository = projectRepository;
     }
 
-
-
     public void initializeUserSampleData() {
 
         log.info("UserInitializer: Starting to initialize user sample data ....");
@@ -47,6 +45,7 @@ public class UserInitializer {
         mainUser.setEmail(fakeValuesService.bothify(  "andrzej-kowalski@wabco-auto.com"));
         mainUser.setPassword(passwordEncoder.encode("pass"));
         mainUser.setRole("USER");
+        userRepository.save(mainUser);
 
         for (int i = 0; i < 10; i++) {
             User user = new User();

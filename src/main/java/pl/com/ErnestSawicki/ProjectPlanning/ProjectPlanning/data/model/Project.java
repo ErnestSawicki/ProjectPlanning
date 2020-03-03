@@ -2,7 +2,6 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Getter @Setter
+@Table(name = "projects")
 public class Project {
 
     @Id
