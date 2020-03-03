@@ -2,6 +2,7 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.ProjectMaturity;
 
 import javax.persistence.*;
 import java.util.ArrayList;

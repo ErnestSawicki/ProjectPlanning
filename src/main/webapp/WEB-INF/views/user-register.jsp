@@ -66,7 +66,7 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<form method="post" action="/register">
+<form method="post" action="/user/register">
     <div class="row">
         <div class="col-25">
             <label for="username">Username</label>

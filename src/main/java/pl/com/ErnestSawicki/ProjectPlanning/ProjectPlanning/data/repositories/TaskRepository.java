@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Task;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
 
 import java.util.List;
 

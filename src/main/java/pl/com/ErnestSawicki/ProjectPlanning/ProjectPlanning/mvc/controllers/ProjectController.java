@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.ProjectMaturity;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.ProjectMaturity;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 
 @RequestMapping("/createProject")

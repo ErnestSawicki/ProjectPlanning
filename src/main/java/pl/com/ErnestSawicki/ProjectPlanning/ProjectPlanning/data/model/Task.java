@@ -2,6 +2,8 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskType;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,11 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "tasks")
 @Getter @Setter
-public class Task {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Task extends EntityBase{
 
     @Column(columnDefinition = "TEXT", name = "description", nullable = false)
     private String taskDescription;

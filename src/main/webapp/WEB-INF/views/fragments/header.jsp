@@ -127,7 +127,7 @@
                 </form>
             </sec:authorize></li></a>
             <a><li><sec:authorize access="!isAuthenticated()">
-                <form method="get" action="/register">
+                <form method="get" action="/user/register">
                     <button class="myButton" type="submit">Register</button>
                     <sec:csrfInput/>
                 </form>

@@ -1,14 +1,14 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.*;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskType;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.PartRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
@@ -18,7 +18,6 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.TaskDTOCreate;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller

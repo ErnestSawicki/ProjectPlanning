@@ -2,22 +2,18 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.ValidPassword;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
+
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Getter @Setter
-public class User {
+public class User extends EntityBase {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     @Column(name = "username", unique = true, nullable = false)
     private String username;
     @Column(name = "first_name", nullable = false)
@@ -47,23 +43,10 @@ public class User {
     @OneToMany
     private List<Task> assignedTasks;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

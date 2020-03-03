@@ -2,9 +2,8 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Task;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
 
 import java.time.LocalDate;
 

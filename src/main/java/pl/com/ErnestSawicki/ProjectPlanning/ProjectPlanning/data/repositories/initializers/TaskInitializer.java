@@ -3,14 +3,13 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.i
 import com.github.javafaker.Faker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.*;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskType;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;

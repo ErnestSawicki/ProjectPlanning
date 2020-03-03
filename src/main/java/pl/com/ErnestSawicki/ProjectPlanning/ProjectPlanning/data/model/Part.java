@@ -11,11 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "parts")
 @Getter @Setter
-public class Part {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Part extends EntityBase{
 
     private String name;
 
@@ -24,16 +20,4 @@ public class Part {
     @ManyToMany(mappedBy = "parts")
     private List<Task> tasks = new ArrayList<>();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Part part = (Part) o;
-        return Objects.equals(id, part.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -2,7 +2,10 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.ValidPassword;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -33,4 +36,5 @@ public class UserDTORegistration {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

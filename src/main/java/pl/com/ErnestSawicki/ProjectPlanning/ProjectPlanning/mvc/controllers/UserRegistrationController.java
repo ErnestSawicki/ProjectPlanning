@@ -12,42 +12,34 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfi
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTORegistration;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.UserService;
 
 import javax.validation.Valid;
 
 @Controller
 @Slf4j
-@RequestMapping("/register")
+@RequestMapping("/user")
 public class UserRegistrationController {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @Autowired
-    public UserRegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public UserRegistrationController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/register")
     public String getRegisterPage() {
         return "user-register";
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public String registerUser(@Valid UserDTORegistration userDTORegistration, BindingResult result) {
         if (result.hasErrors()){
+
             return "redirect:/register";
         }
-
-        log.trace("Form data -> userDTORegistration: {}", userDTORegistration.toString());
-        User registeredUser = new User();
-        BeanUtils.copyProperties(userDTORegistration, registeredUser);
-        registeredUser.setPassword(passwordEncoder.encode(registeredUser.getPassword()));
-        registeredUser.setRole("USER");
-        registeredUser.setActive(true);
-        log.trace("Created user -> {}", registeredUser.toString());
-        userRepository.save(registeredUser);
+        userService.registerUser(userDTORegistration);
         return "redirect:/";
     }
 }

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Task;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskStatus;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.TaskType;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskStatus;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.TaskType;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.specification.TaskSpecification;
 

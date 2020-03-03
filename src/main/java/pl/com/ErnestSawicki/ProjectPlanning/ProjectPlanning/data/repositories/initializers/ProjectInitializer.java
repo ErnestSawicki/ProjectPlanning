@@ -5,11 +5,8 @@ import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Project;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.ProjectMaturity;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumeration.ProjectMaturity;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 
 import java.util.Locale;
