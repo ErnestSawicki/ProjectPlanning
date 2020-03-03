@@ -120,6 +120,12 @@
                     <sec:csrfInput/>
                 </form>
             </sec:authorize></li></a>
+            <a><li><sec:authorize access="isAuthenticated()">
+                <form method="get" action="/user/updateProfile">
+                    <button class="myButton" type="submit">Update profile</button>
+                    <sec:csrfInput/>
+                </form>
+            </sec:authorize></li></a>
             <a><li><sec:authorize access="!isAuthenticated()">
                 <form method="get" action="/login">
                     <button class="myButton" type="submit">Login</button>

@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTORegistration;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOUpdateProfile;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.UserService;
+
+import java.security.Principal;
 
 @Service
 @Slf4j
@@ -39,7 +42,19 @@ public class UserServiceDefault implements UserService {
     }
 
     @Override
+    public boolean updateUserProfile(UserDTOUpdateProfile userDTOUpdateProfile) {
+        log.debug("UserServiceDefault-updateUserProfile: userDTORegistration={}", userDTOUpdateProfile.toString());
+        log.debug("UserServiceDefault-updateUserProfile: User update started...");
+        User userToUpdate = userRepository.findUserByUsername(userDTOUpdateProfile.getUsername()).get(0);
+        BeanUtils.copyProperties(userDTOUpdateProfile, userToUpdate);
+        log.debug("UserServiceDefault-updateUserProfile: updatedUser to save={}", userToUpdate.toString());
+        log.debug("UserServiceDefault-updateUserProfile: ... user update finished");
+        userRepository.save(userToUpdate);
+        return true;
+    }
+
+    @Override
     public User getUserDetails(String username) {
-        return null;
+        return userRepository.findUserByUsername(username).get(0);
     }
 }

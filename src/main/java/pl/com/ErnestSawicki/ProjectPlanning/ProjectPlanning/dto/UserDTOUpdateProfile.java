@@ -3,14 +3,14 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.config.passwordConfig.ValidPassword;
-
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-@Getter @Setter @ToString
-public class UserDTORegistration {
+@Getter
+@Setter
+@ToString
+public class UserDTOUpdateProfile {
 
     @NotEmpty
     private String username;
@@ -21,8 +21,5 @@ public class UserDTORegistration {
     @NotEmpty
     @Email
     private String email;
-    @NotEmpty
-    @ValidPassword
-    private String password;
 
 }
