@@ -65,7 +65,7 @@
     <title>UserUpdateProfile</title>
 </head>
 <body>
-<%--attibute = "userProfile"--%>
+
 <div class="header">
     <jsp:include page="fragments/header.jsp"/>
 </div>
@@ -106,7 +106,6 @@
                 <input type="text" required name="email" id="email" class="form-control" value="${userProfile.email}"/>
             </div>
         </div>
-
         <button class="submitButton" type="submit">Register</button>
         <sec:csrfInput/>
     </form>
