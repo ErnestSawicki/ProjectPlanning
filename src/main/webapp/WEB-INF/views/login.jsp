@@ -99,7 +99,7 @@
             </form>
             </div>
         </div>
-        <div class="col-5"></div>
+        <div class="col-5"><a href="/login/forgotPassword">Forgot Password?</a></div>
     </div>
 </div>
 <div class="footer">
