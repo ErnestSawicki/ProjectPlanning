@@ -2,6 +2,7 @@ package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +13,10 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Confirmat
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ConfirmationTokenRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOPasswordReset;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.implementations.EmailSenderServiceDefault;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/login")
@@ -23,12 +25,14 @@ public class LoginController  {
     private final UserRepository userRepository;
     private final EmailSenderServiceDefault emailSenderService;
     private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public LoginController(UserRepository userRepository, EmailSenderServiceDefault emailSenderService, ConfirmationTokenRepository confirmationTokenRepository) {
+    public LoginController(UserRepository userRepository, EmailSenderServiceDefault emailSenderService, ConfirmationTokenRepository confirmationTokenRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.emailSenderService = emailSenderService;
         this.confirmationTokenRepository = confirmationTokenRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -48,7 +52,6 @@ public class LoginController  {
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
             confirmationTokenRepository.save(confirmationToken);
-
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo("ErnestSawicki94@gmail.com");
             mailMessage.setSubject("FTROT - password reset");
@@ -63,17 +66,23 @@ public class LoginController  {
     @GetMapping(value = "/confirm-reset")
     public String getPasswordResetPage(@RequestParam String token, Model model){
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByConfirmationToken(token);
-        User user = confirmationToken.getUser();
-        model.addAttribute("user", user);
-        model.addAttribute("confirmationToken", token);
+        if (!confirmationToken.isTokenUsed()){
+            User user = confirmationToken.getUser();
+            model.addAttribute("user", user);
+            model.addAttribute("confirmationToken", token);
+            confirmationToken.setTokenUsed(true);
+            confirmationTokenRepository.save(confirmationToken);
+        } else {
+            return  "redirect:/";
+        }
         return "user-passwordReset";
     }
 
     @PostMapping(value = "/confirm-reset")
-    public String resetUserPassword(@RequestParam String username, @RequestParam String newPassword, @RequestParam String confirmPassword){
-        User userByUsername = userRepository.findUserByUsername(username).get(0);
-        if (newPassword.matches(confirmPassword)){
-            userByUsername.setPassword(newPassword);
+    public String resetUserPassword(@Valid UserDTOPasswordReset userDTOPasswordReset){
+        User userByUsername = userRepository.findUserByUsername(userDTOPasswordReset.getUsername()).get(0);
+        if (userDTOPasswordReset.getNewPassword().matches(userDTOPasswordReset.getConfirmPassword())){
+            userByUsername.setPassword(passwordEncoder.encode(userDTOPasswordReset.getNewPassword()));
             userRepository.save(userByUsername);
         }
         return "/login";

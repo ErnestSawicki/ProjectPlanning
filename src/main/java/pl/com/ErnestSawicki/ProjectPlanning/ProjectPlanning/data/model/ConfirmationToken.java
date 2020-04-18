@@ -18,11 +18,15 @@ public class ConfirmationToken extends EntityBase {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    @Column
+    private boolean tokenUsed;
+
     public ConfirmationToken() {
     }
 
     public ConfirmationToken(User user){
         this.user = user;
         confirmationToken = UUID.randomUUID().toString();
+        tokenUsed = false;
     }
 }
