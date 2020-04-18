@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: dell
@@ -14,11 +15,8 @@
     <title>Title</title>
 </head>
 <body>
-Here you can reset your password:
-Your token is :
-<div>${confirmationToken}</div>
-User information:
-<div>${user.toString()}</div>
+
+<c:if test="${confirmationToken=='false'}">
 <form method="post" action="/login/confirm-reset">
     <div>
         <label for="newPassword">New Password</label>
@@ -36,5 +34,11 @@ User information:
     <button type="submit">Reset password</button>
     <sec:csrfInput/>
 </form>
+</c:if>
+<c:if test="${confirmationToken=='true'}">
+    This token was already used.
+</c:if>
+
+
 </body>
 </html>

@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/login")
-public class LoginController  {
+public class LoginController {
 
     private final UserRepository userRepository;
     private final EmailSenderServiceDefault emailSenderService;
@@ -36,19 +36,19 @@ public class LoginController  {
     }
 
     @GetMapping
-    public String getLoginPage(){
+    public String getLoginPage() {
         return "login";
     }
 
     @GetMapping(value = "/forgotPassword")
-    public String getForgotPasswordPage(){
+    public String getForgotPasswordPage() {
         return "user-forgotPassword";
     }
 
     @PostMapping(value = "/forgotPassword")
-    public String userForgotPassword(@RequestParam String email){
+    public String userForgotPassword(@RequestParam String email) {
         User user = userRepository.findUserByEmail(email);
-        if(user != null){
+        if (user != null) {
 
             ConfirmationToken confirmationToken = new ConfirmationToken(user);
             confirmationTokenRepository.save(confirmationToken);
@@ -57,31 +57,29 @@ public class LoginController  {
             mailMessage.setSubject("FTROT - password reset");
             mailMessage.setFrom("FTROT@gmail.com");
             mailMessage.setText("To complete the password reset process, please click here: "
-                    + "http://localhost:8080/login/confirm-reset?token="+ confirmationToken.getConfirmationToken());
+                    + "http://localhost:8080/login/confirm-reset?token=" + confirmationToken.getConfirmationToken());
             emailSenderService.sendEmail(mailMessage);
         }
         return "home-page";
     }
 
     @GetMapping(value = "/confirm-reset")
-    public String getPasswordResetPage(@RequestParam String token, Model model){
+    public String getPasswordResetPage(@RequestParam String token, Model model) {
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByConfirmationToken(token);
-        if (!confirmationToken.isTokenUsed()){
-            User user = confirmationToken.getUser();
-            model.addAttribute("user", user);
-            model.addAttribute("confirmationToken", token);
-            confirmationToken.setTokenUsed(true);
-            confirmationTokenRepository.save(confirmationToken);
-        } else {
-            return  "redirect:/";
-        }
+
+        User user = confirmationToken.getUser();
+        model.addAttribute("user", user);
+        model.addAttribute("confirmationToken", confirmationToken.isTokenUsed());
+        confirmationToken.setTokenUsed(true);
+        confirmationTokenRepository.save(confirmationToken);
+
         return "user-passwordReset";
     }
 
     @PostMapping(value = "/confirm-reset")
-    public String resetUserPassword(@Valid UserDTOPasswordReset userDTOPasswordReset){
+    public String resetUserPassword(@Valid UserDTOPasswordReset userDTOPasswordReset) {
         User userByUsername = userRepository.findUserByUsername(userDTOPasswordReset.getUsername()).get(0);
-        if (userDTOPasswordReset.getNewPassword().matches(userDTOPasswordReset.getConfirmPassword())){
+        if (userDTOPasswordReset.getNewPassword().matches(userDTOPasswordReset.getConfirmPassword())) {
             userByUsername.setPassword(passwordEncoder.encode(userDTOPasswordReset.getNewPassword()));
             userRepository.save(userByUsername);
         }
