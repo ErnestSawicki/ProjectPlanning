@@ -99,7 +99,7 @@
 <jsp:include page="fragments/header.jsp"/>
 
 <div class="container">
-    <form method="post" action="/createProject">
+    <form method="post" action="/project/createProject">
         <div class="row">
             <div class="col-25">
                 <label for="PID">PID</label>

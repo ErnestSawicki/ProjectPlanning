@@ -93,7 +93,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div>
-    <form method="post" action="/projectTasks">
+    <form method="post" action="/project/projectTasks">
         <div class="filler">
             <div class="row">
                 <div class="col-25">
@@ -165,7 +165,7 @@
             <td>${projectTask.finishDate}</td>
             <td>${projectTask.plannedHours}</td>
             <td>${projectTask.actualHours}</td>
-            <td><a href="/modifyTask?taskId=${projectTask.id}"/>Modify</td>
+            <td><a href="/task/modifyTask?taskId=${projectTask.id}"/>Modify</td>
         </tr>
     </c:forEach>
 </table>

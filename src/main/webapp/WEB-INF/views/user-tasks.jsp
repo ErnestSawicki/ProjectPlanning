@@ -106,7 +106,7 @@
             <td>${userTask.startDate}</td>
             <td>${userTask.dueDate}</td>
             <td>${userTask.plannedHours}</td>
-            <td><a href="/modifyTask?taskId=${userTask.id}"/>Modify</td>
+            <td><a href="/task/modifyTask?taskId=${userTask.id}"/>Modify</td>
         </tr>
     </c:forEach>
 </table>

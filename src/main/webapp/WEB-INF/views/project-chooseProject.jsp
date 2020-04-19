@@ -15,7 +15,7 @@
     <title>ChooserProject</title>
 </head>
 <body>
-<form method="get" action="/projectTasks">
+<form method="get" action="/project/projectTasks">
     <select name="choseProject" id="choseProject">
         <c:forEach items="${userProjects}" var="userProject">
             <option value="${userProject.PID}">${userProject.PID}</option>

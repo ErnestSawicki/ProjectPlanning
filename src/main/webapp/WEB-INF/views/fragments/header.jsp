@@ -103,19 +103,19 @@
                 </form>
             </sec:authorize></li></a>
             <a><li><sec:authorize access="isAuthenticated()">
-                <form method="get" action="/chooseProject">
+                <form method="get" action="/project/chooseProject">
                     <button class="myButton" type="submit">Project Tasks</button>
                     <sec:csrfInput/>
                 </form>
             </sec:authorize></li></a>
             <a><li><sec:authorize access="isAuthenticated()">
-                <form method="get" action="/createProject">
+                <form method="get" action="/project/createProject">
                     <button class="myButton" type="submit">CreateProject</button>
                     <sec:csrfInput/>
                 </form>
             </sec:authorize></li></a>
             <a><li><sec:authorize access="isAuthenticated()">
-                <form method="get" action="/createTask">
+                <form method="get" action="/task/createTask">
                     <button class="myButton" type="submit">Create task</button>
                     <sec:csrfInput/>
                 </form>

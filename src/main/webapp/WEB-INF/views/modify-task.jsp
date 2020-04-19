@@ -97,7 +97,7 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div class="container">
-    <form method="post" action="/modifyTask">
+    <form method="post" action="/task/modifyTask">
         <input type="number" value="${taskToModify.id}" id="taskId" requred name="taskId" hidden/>
         <div class="row">
             <div class="col-25">

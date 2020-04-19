@@ -14,6 +14,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ConfirmationTokenRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOPasswordReset;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.LoginService;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.implementations.EmailSenderServiceDefault;
 
 import javax.validation.Valid;
@@ -23,16 +24,16 @@ import javax.validation.Valid;
 public class LoginController {
 
     private final UserRepository userRepository;
-    private final EmailSenderServiceDefault emailSenderService;
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LoginService loginService;
 
     @Autowired
-    public LoginController(UserRepository userRepository, EmailSenderServiceDefault emailSenderService, ConfirmationTokenRepository confirmationTokenRepository, PasswordEncoder passwordEncoder) {
+    public LoginController(UserRepository userRepository, ConfirmationTokenRepository confirmationTokenRepository, PasswordEncoder passwordEncoder, LoginService loginService) {
         this.userRepository = userRepository;
-        this.emailSenderService = emailSenderService;
         this.confirmationTokenRepository = confirmationTokenRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loginService = loginService;
     }
 
     @GetMapping
@@ -47,42 +48,24 @@ public class LoginController {
 
     @PostMapping(value = "/forgotPassword")
     public String userForgotPassword(@RequestParam String email) {
-        User user = userRepository.findUserByEmail(email);
-        if (user != null) {
-
-            ConfirmationToken confirmationToken = new ConfirmationToken(user);
-            confirmationTokenRepository.save(confirmationToken);
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo("ErnestSawicki94@gmail.com");
-            mailMessage.setSubject("FTROT - password reset");
-            mailMessage.setFrom("FTROT@gmail.com");
-            mailMessage.setText("To complete the password reset process, please click here: "
-                    + "http://localhost:8080/login/confirm-reset?token=" + confirmationToken.getConfirmationToken());
-            emailSenderService.sendEmail(mailMessage);
-        }
+        loginService.sendForgotPasswordEmail(email);
         return "home-page";
     }
 
     @GetMapping(value = "/confirm-reset")
     public String getPasswordResetPage(@RequestParam String token, Model model) {
         ConfirmationToken confirmationToken = confirmationTokenRepository.findByConfirmationToken(token);
-
         User user = confirmationToken.getUser();
         model.addAttribute("user", user);
         model.addAttribute("confirmationToken", confirmationToken.isTokenUsed());
-        confirmationToken.setTokenUsed(true);
         confirmationTokenRepository.save(confirmationToken);
-
+        confirmationToken.setTokenUsed(true);
         return "user-passwordReset";
     }
 
     @PostMapping(value = "/confirm-reset")
     public String resetUserPassword(@Valid UserDTOPasswordReset userDTOPasswordReset) {
-        User userByUsername = userRepository.findUserByUsername(userDTOPasswordReset.getUsername()).get(0);
-        if (userDTOPasswordReset.getNewPassword().matches(userDTOPasswordReset.getConfirmPassword())) {
-            userByUsername.setPassword(passwordEncoder.encode(userDTOPasswordReset.getNewPassword()));
-            userRepository.save(userByUsername);
-        }
+        loginService.resetUserPassword(userDTOPasswordReset);
         return "/login";
     }
 }
