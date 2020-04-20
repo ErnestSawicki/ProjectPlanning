@@ -1,4 +1,4 @@
-package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto;
+package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.task;
 
 import lombok.Getter;
 import lombok.Setter;

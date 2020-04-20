@@ -1,6 +1,6 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services;
 
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOPasswordReset;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTOPasswordReset;
 
 public interface LoginService {
 

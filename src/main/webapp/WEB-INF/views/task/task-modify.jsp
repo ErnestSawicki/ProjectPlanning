@@ -95,7 +95,7 @@
     <title>ModifyTask</title>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <div class="container">
     <form method="post" action="/task/modifyTask">
         <input type="number" value="${taskToModify.id}" id="taskId" requred name="taskId" hidden/>
@@ -193,7 +193,7 @@
     </form>
 </div>
 <div class="footer">
-    <jsp:include page="fragments/footer.jsp"/>
+    <jsp:include page="../fragments/footer.jsp"/>
 </div>
 </body>
 </html>

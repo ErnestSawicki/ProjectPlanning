@@ -65,7 +65,7 @@
     <title>UserTasks</title>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <div class="container">
 <form method="post" action="/userTasks">
     <select name="taskStatus">
@@ -111,7 +111,7 @@
     </c:forEach>
 </table>
 <div class="footer">
-    <jsp:include page="fragments/footer.jsp"/>
+    <jsp:include page="../fragments/footer.jsp"/>
 </div>
 </body>
 </html>

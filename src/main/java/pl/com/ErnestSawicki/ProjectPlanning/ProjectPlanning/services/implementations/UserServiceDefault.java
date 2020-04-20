@@ -7,11 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTORegistration;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOUpdateProfile;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTORegistration;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTOUpdateProfile;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.UserService;
-
-import java.security.Principal;
 
 @Service
 @Slf4j

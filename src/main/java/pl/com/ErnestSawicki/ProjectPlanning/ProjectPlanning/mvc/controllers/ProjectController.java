@@ -15,6 +15,8 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumerati
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.project.ProjectDTOCreate;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.ProjectService;
 
 import java.security.Principal;
 import java.util.Arrays;
@@ -27,31 +29,25 @@ public class ProjectController {
     private final ProjectRepository projectRepository;
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+    private final ProjectService projectService;
 
     @Autowired
-    public ProjectController(ProjectRepository projectRepository, TaskRepository taskRepository, UserRepository userRepository) {
+    public ProjectController(ProjectRepository projectRepository, TaskRepository taskRepository, UserRepository userRepository, ProjectService projectService) {
         this.projectRepository = projectRepository;
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
+        this.projectService = projectService;
     }
 
     @GetMapping(value = "/createProject")
     public String getProjectPage(){
-        return "project-create";
+        return "project/project-create";
 
     }
 
     @PostMapping(value = "/createProject")
-    public String createProject(@RequestParam String PID,
-                                @RequestParam String name,
-                                @RequestParam String projectDescription,
-                                @RequestParam String projectMaturity){
-        Project createdProject = new Project();
-        createdProject.setPID(PID);
-        createdProject.setProjectName(name);
-        createdProject.setDescription(projectDescription);
-        createdProject.setProjectMaturity(ProjectMaturity.valueOf(projectMaturity));
-        projectRepository.save(createdProject);
+    public String createProject(ProjectDTOCreate projectDTOCreate){
+        projectService.createProject(projectDTOCreate);
         return "redirect:/";
     }
 
@@ -67,14 +63,14 @@ public class ProjectController {
 
         List<User> projectParticipants = userRepository.findAllByProjectsIs(project);
         model.addAttribute("projectParticipants", projectParticipants);
-        return "project-tasks";
+        return "project/project-tasks";
     }
 
     @GetMapping("/chooseProject")
     public String getChooseProjectPage(Model model, Principal principal){
         List<Project> userProjects = projectRepository.findAllByParticipantsIs(userRepository.findUserByUsername(principal.getName()).get(0));
         model.addAttribute("userProjects", userProjects);
-        return "project-chooseProject";
+        return "project/project-chooseProject";
     }
 }
 

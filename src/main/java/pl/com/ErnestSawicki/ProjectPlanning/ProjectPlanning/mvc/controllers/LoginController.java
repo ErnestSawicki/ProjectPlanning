@@ -1,7 +1,6 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.mvc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,8 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.Confirmat
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ConfirmationTokenRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOPasswordReset;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTOPasswordReset;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.LoginService;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.implementations.EmailSenderServiceDefault;
 
 import javax.validation.Valid;
 

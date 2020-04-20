@@ -97,7 +97,7 @@
         </div>
         <ul class="navigation">
             <a><li><sec:authorize access="isAuthenticated()">
-                <form method="get" action="/userTasks">
+                <form method="get" action="/task/userTasks">
                     <button class="myButton" type="submit">MyTasks</button>
                     <sec:csrfInput/>
                 </form>

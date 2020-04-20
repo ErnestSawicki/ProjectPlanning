@@ -1,10 +1,8 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services;
 
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.User;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTORegistration;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.UserDTOUpdateProfile;
-
-import java.security.Principal;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTORegistration;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.user.UserDTOUpdateProfile;
 
 public interface UserService {
 

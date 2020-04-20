@@ -91,7 +91,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="fragments/header.jsp"/>
+<jsp:include page="../fragments/header.jsp"/>
 <div>
     <form method="post" action="/project/projectTasks">
         <div class="filler">
@@ -171,7 +171,7 @@
 </table>
 
 <div class="footer">
-    <jsp:include page="fragments/footer.jsp"/>
+    <jsp:include page="../fragments/footer.jsp"/>
 </div>
 
 </body>

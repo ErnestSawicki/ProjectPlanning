@@ -1,6 +1,6 @@
 package pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services;
 
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.TaskDTOCreate;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.task.TaskDTOCreate;
 
 import javax.servlet.http.HttpServletRequest;
 

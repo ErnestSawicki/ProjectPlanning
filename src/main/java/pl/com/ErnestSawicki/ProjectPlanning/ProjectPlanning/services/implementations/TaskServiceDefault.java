@@ -8,7 +8,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.model.enumerati
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.ProjectRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
-import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.TaskDTOCreate;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.task.TaskDTOCreate;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.TaskService;
 
 import javax.servlet.http.HttpServletRequest;
