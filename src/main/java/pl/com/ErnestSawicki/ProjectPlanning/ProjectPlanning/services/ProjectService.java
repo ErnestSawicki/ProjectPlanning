@@ -5,5 +5,4 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.project.ProjectD
 public interface ProjectService {
 
     void createProject(ProjectDTOCreate projectDTOCreate);
-    void getProjectTasks();
 }
