@@ -21,7 +21,6 @@ public class Project {
     @Column
     private String projectName;
 
-
     @Column
     private String description;
 

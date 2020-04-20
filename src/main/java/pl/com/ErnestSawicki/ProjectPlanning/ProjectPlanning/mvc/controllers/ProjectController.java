@@ -16,6 +16,7 @@ import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.Pr
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.TaskRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.data.repositories.UserRepository;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.project.ProjectDTOCreate;
+import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.dto.project.ProjectDTODetails;
 import pl.com.ErnestSawicki.ProjectPlanning.ProjectPlanning.services.ProjectService;
 
 import java.security.Principal;
@@ -71,6 +72,13 @@ public class ProjectController {
         List<Project> userProjects = projectRepository.findAllByParticipantsIs(userRepository.findUserByUsername(principal.getName()).get(0));
         model.addAttribute("userProjects", userProjects);
         return "project/project-chooseProject";
+    }
+
+    @GetMapping("/projectDetails")
+    public String getProjectDetailsPage(@RequestParam String projectId, Model model){
+        ProjectDTODetails projectDTODetails = projectService.prepareProjectDetails(projectId);
+        model.addAttribute("project", projectDTODetails);
+        return "project/projectDetails";
     }
 }
 
